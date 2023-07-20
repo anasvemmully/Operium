@@ -1,0 +1,37 @@
+# Jekyll build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Jekyll configuration
+_config.yml
+.jekyll-config.yml
+
+# Jekyll plugins and gems
+vendor/
+
+# Jekyll cache and logs
+.cache/
+.jekyll-*
+
+# OS and editor-specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.log
+
+# Temporary files and directories
+*.tmp
+*.bak
+*.backup
+
+# Environment-specific files (optional, adjust as needed)
+.env
+.env.*
+
+# Dependency lock files (optional, adjust as needed)
+Gemfile.lock
+yarn.lock
+package-lock.json

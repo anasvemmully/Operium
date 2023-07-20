@@ -1,0 +1,21 @@
+$Caprasimo: 'Caprasimo', cursive;
+$OpenSans: 'Open Sans', sans-serif;
+$RobotoSlab: 'Roboto Slab', serif;
+$Rubik: 'Rubik', sans-serif;
+$Poppins: 'Poppins', sans-serif;
+
+$ScreenPadding: 12rem;
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    font-family: $OpenSans;
+}
+
+// body {
+//     padding: 0rem $ScreenPadding;
+// }

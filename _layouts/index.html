@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include header.html %}
+</head>
+
+<body>
+    {% include navigation.html %}
+    {% include body.html %}
+
+    <script type="text/javascript">
+        (() => {
+
+            const members = {{ site.data.members | jsonify }};
+
+            const searchInput = document.getElementById("search-input")
+            const searchResult = document.getElementById("result-container")
+
+            
+
+        })();
+    </script>
+</body>
+
+</html>

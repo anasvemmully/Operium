@@ -1,0 +1,55 @@
+.body-container {
+    padding: 0rem $ScreenPadding;
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    // margin: 2rem 0rem;
+
+    background-color: #e08c6e;
+
+    .body-content {
+        font-size: 4rem;
+        font-family: $RobotoSlab;
+        font-weight: bold;
+
+    }
+
+    .body-image {
+        background-image: url(/Operium/assets/images/dept3.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 500px;
+        width: 100%;
+    }
+
+}
+
+.secondary-conatiner {
+    padding: 2rem $ScreenPadding;
+
+    .search-container {
+
+
+        border: 1px solid black;
+        display: inline-flex;
+        padding: 10px;
+        border-radius: 50px;
+        gap: 1rem;
+
+        .dark {
+            color: black;
+            font-weight: bolder;
+        }
+
+        #search-input {
+            width: 200px;
+            border: none;
+            outline: none;
+            color: black;
+        }
+    }
+
+    .result-container {
+        color: black !important;
+    }
+}
