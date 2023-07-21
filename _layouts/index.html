@@ -9,17 +9,65 @@
     {% include navigation.html %}
     {% include body.html %}
 
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
         (() => {
 
-            const members = {{ site.data.members | jsonify }};
+            const members = {{ site.data.members | jsonify
+        }};
 
-            const searchInput = document.getElementById("search-input")
-            const searchResult = document.getElementById("result-container")
+        // const searchInput = document.getElementById("search-input");
 
-            
 
-        })();
+        class Render {
+
+            constructor(_members, resultContainer, searchInput) {
+                this.members = _members;
+                this.container = document.querySelector(resultContainer);
+                this.input = document.querySelector(searchInput);
+                this.input.addEventListener("input", (e) => { 
+                    var result = this.search(e.target.value)
+                    this.container.innerHTML = "";
+                    this.generate(result)
+                 });
+                this.generate(this.members);
+            }
+
+            search(value) {
+                return this.members.filter((member) => new RegExp(`${value}`, 'i').test(member.name));
+            }
+
+            generate(peep) {
+                console.log(peep)
+                peep.forEach(ele => {
+                    this.container.innerHTML += this._generate(ele);
+                });
+            }
+
+            _generate(ele) {
+
+                const image = ele.profile ? `{{ site.baseurl }}/assets/profiles/${ele.profile}` : `{{ site.baseurl }}/assets/images/user.png`;
+                const gender = ele.gender == "male" ? "male" : "female";
+
+                return `<div class="profile-card">
+                    <div class="profile-image ${gender}">
+                        <img src="${image}" />    
+                    </div>
+                    <div class="profile-content">
+                        <div class="profile-name">${ele.name}</div>
+                        <div class="profile-description">${ele.description}</div>
+                        <div class="profile-badges">
+
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+        }
+
+        var render = new Render(members, "#result-container", "#search-input");
+
+
+        }) ();
     </script>
 </body>
 
