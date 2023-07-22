@@ -8,6 +8,46 @@
 <body>
     {% include navigation.html %}
     {% include body.html %}
+    {% include footer.html %}
+
+    <div id="goTop">
+        <span class="material-symbols-outlined">
+            keyboard_arrow_up
+        </span>
+    </div>
+
+    <script type="text/javascript" defer>
+        (() => {
+
+            const basicScrollTop = function () {
+
+                const btnTop = document.querySelector('#goTop');
+
+                const btnReveal = function () {
+                    if (window.scrollY >= 300) {
+                        btnTop.classList.add('is-visible');
+                    } else {
+                        btnTop.classList.remove('is-visible');
+                    }
+                }
+                
+                const TopscrollTo = function () {
+                    if (window.scrollY != 0) {
+                        setTimeout(function () {
+                            window.scrollTo(0, window.scrollY - 30);
+                            TopscrollTo();
+                        }, 5);
+                    }
+                }
+
+                window.addEventListener('scroll', btnReveal);
+                btnTop.addEventListener('click', TopscrollTo);
+
+            };
+            basicScrollTop();
+
+        })();
+    </script>
 
     <script type="text/javascript" defer>
         (() => {
@@ -21,51 +61,135 @@
         class Render {
 
             constructor(_members, resultContainer, searchInput) {
+
+                this.users = [];
                 this.members = _members;
+
+                this.stat = document.querySelector("#result-stat");
                 this.container = document.querySelector(resultContainer);
                 this.input = document.querySelector(searchInput);
-                this.input.addEventListener("input", (e) => { 
-                    var result = this.search(e.target.value)
-                    this.container.innerHTML = "";
-                    this.generate(result)
-                 });
+
                 this.generate(this.members);
-            }
 
-            search(value) {
-                return this.members.filter((member) => new RegExp(`${value}`, 'i').test(member.name));
-            }
-
-            generate(peep) {
-                console.log(peep)
-                peep.forEach(ele => {
-                    this.container.innerHTML += this._generate(ele);
+                this.input.addEventListener("input", (e) => {
+                    this.container.innerHTML = "";
+                    this.search(e.target.value)
                 });
             }
 
-            _generate(ele) {
+            search(value) {
+                const res = this.users.filter((user) => new RegExp(`^${value}`, 'i').test(user.name));
 
-                const image = ele.profile ? `{{ site.baseurl }}/assets/profiles/${ele.profile}` : `{{ site.baseurl }}/assets/images/user.png`;
-                const gender = ele.gender == "male" ? "male" : "female";
+                res.forEach(((user) => {
+                    this.container.append(user.element);
+                }))
 
-                return `<div class="profile-card">
-                    <div class="profile-image ${gender}">
-                        <img src="${image}" />    
-                    </div>
-                    <div class="profile-content">
-                        <div class="profile-name">${ele.name}</div>
-                        <div class="profile-description">${ele.description}</div>
-                        <div class="profile-badges">
+                console.log(res);
 
-                        </div>
-                    </div>
-                </div>`;
+                this.stat.textContent = res?.length;
+
             }
 
+            generate(peep) {
+                this.users = peep.map(ele => {
+
+                    const card = document.querySelector("[user-template]").content.cloneNode(true).children[0];
+                    const image = ele.profile ? `{{ site.baseurl }}/assets/profiles/${ele.profile}` : `{{ site.baseurl }}/assets/images/user.png`;
+
+                    card.querySelector("[user-image]").src = image;
+                    if (ele.profile == undefined) {
+                        card.querySelector("[user-image]").className = "overlay";
+                    }
+                    card.querySelector("[user-name]").textContent = ele.name;
+                    card.querySelector("[user-description]").textContent = ele.description;
+
+                    if (ele.links && Object.keys(ele.links).length > 0) {
+
+                        var data = Object.entries(ele.links);
+
+                        data.sort((a, b) => {
+                            const keyA = a[0].toLowerCase();
+                            const keyB = b[0].toLowerCase();
+                            if (keyA < keyB) return -1;
+                            if (keyA > keyB) return 1;
+                            return 0;
+                        });
+
+                        data.forEach((link, index) => {
+
+                            var a = document.createElement('a');
+                            const img = document.createElement('img');
+
+                            if (link[0] == "github") {
+
+                                a.href = link[1];
+                                a.target = "_blank";
+                                img.className = "badges";
+                                img.src = "{{ site.baseurl }}/assets/images/github-white.svg";
+                                img.alt = "github white icon";
+                                a.appendChild(img);
+                                card.querySelector("[user-badges]").appendChild(a)
+
+                            } else if (link[0] == "linkedin") {
+
+                                a.href = link[1];
+                                a.target = "_blank";
+                                img.className = "badges linkedin";
+                                img.src = "{{ site.baseurl }}/assets/images/linkedin-white.png";
+                                img.alt = "linkedin white icon";
+                                a.appendChild(img);
+                                card.querySelector("[user-badges]").appendChild(a)
+
+                            } else if (link[0] == "twitter") {
+
+                                a.href = link[1];
+                                a.target = "_blank";
+                                img.className = "badges";
+                                img.src = "{ site.baseurl }}/assets/images/twitter-white.png";
+                                img.alt = "twitter white icon";
+                                a.appendChild(img);
+                                card.querySelector("[user-badges]").appendChild(a)
+
+                            } else if (link[0] == "mail") {
+
+                                a.href = link[1];
+                                a.target = "_blank";
+                                img.className = "badges";
+                                img.src = "{{ site.baseurl }}/assets/images/mail-xxl.png";
+                                img.alt = "mail white icon";
+                                a.appendChild(img);
+                                card.querySelector("[user-badges]").appendChild(a)
+
+                            } else {
+
+                                a.href = link[1];
+                                a.target = "_blank";
+                                img.className = "badges";
+                                img.src = "{{ site.baseurl }}/assets/images/link-xxl.png";
+                                img.alt = "link white icon";
+                                a.appendChild(img);
+                                card.querySelector("[user-badges]").appendChild(a)
+
+                            }
+                        });
+
+                    }
+
+
+                    this.container.append(card)
+
+                    return {
+                        name: ele.name,
+                        element: card
+                    }
+
+                });
+
+                this.stat.textContent = this.users.length;
+            }
         }
 
-        var render = new Render(members, "#result-container", "#search-input");
-
+        var wrapper = new Render(members, "#result-container", "#search-input");
 
         }) ();
     </script>

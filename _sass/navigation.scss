@@ -1,16 +1,15 @@
 .navigation-container {
-    // padding: 1.6rem 0rem;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1.6rem $ScreenPadding;
-    // border-bottom: 1px solid rgba(11, 11, 11, 0.3);
 
     .navigation-title {
        font-size: 1.6rem;
-       font-weight: bold;
+       font-weight: 1000;
        color: black;
+       font-family: $RobotoSlab;
 
     }
 }

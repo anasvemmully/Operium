@@ -1,8 +1,13 @@
-$Caprasimo: 'Caprasimo', cursive;
-$OpenSans: 'Open Sans', sans-serif;
-$RobotoSlab: 'Roboto Slab', serif;
-$Rubik: 'Rubik', sans-serif;
-$Poppins: 'Poppins', sans-serif;
+$Caprasimo: 'Caprasimo',
+cursive;
+$OpenSans: 'Open Sans',
+sans-serif;
+$RobotoSlab: 'Roboto Slab',
+serif;
+$Rubik: 'Rubik',
+sans-serif;
+$Poppins: 'Poppins',
+sans-serif;
 
 $ScreenPadding: 12rem;
 
@@ -14,8 +19,33 @@ $ScreenPadding: 12rem;
     box-sizing: border-box;
     color: white;
     font-family: $OpenSans;
+
+    user-select: none;
 }
 
-// body {
-//     padding: 0rem $ScreenPadding;
-// }
+body {
+    &::-webkit-scrollbar {
+        width: 0px;
+        display: none;
+    }
+
+    #goTop {
+        position: fixed;
+        z-index: 999;
+        right: 0;
+        bottom: 10%;
+        transform: translateY(-50%);
+        padding: 20px;
+        color: black !important;
+        background: black;
+        border: none;
+        opacity: 0;
+        transition: opacity 0.4s linear;
+
+    }
+
+    #goTop.is-visible {
+        opacity: 1;
+    }
+
+}
