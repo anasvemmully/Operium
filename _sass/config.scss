@@ -9,6 +9,10 @@ sans-serif;
 $Poppins: 'Poppins',
 sans-serif;
 
+
+$NoResultHeight: 60vh;
+$FooterColor: grey;
+$BodyBackground: rgba(188, 188, 188, 0.7);
 $ScreenPadding: 12rem;
 
 *,
@@ -24,12 +28,16 @@ $ScreenPadding: 12rem;
 }
 
 body {
+
+    background-color: $BodyBackground;
+
     &::-webkit-scrollbar {
         width: 0px;
         display: none;
     }
 
     #goTop {
+        cursor: pointer;
         position: fixed;
         z-index: 999;
         right: 0;

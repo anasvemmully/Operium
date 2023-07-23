@@ -4,7 +4,7 @@
     // width: 100%;
     align-items: center;
     // gap: 4rem;
-    
+
     background: rgb(28, 4, 46);
     background: -moz-linear-gradient(73deg, rgba(28, 4, 46, 1) 0%, rgba(35, 15, 8, 1) 100%);
     background: -webkit-linear-gradient(73deg, rgba(28, 4, 46, 1) 0%, rgba(35, 15, 8, 1) 100%);
@@ -23,6 +23,12 @@
 }
 
 .secondary-container {
+
+    // background: rgba(28, 4, 46, 0.1);
+    // background: -moz-linear-gradient(84deg, rgba(28, 4, 46, 1) 0%, rgba(35, 15, 8, 1) 100%);
+    // background: -webkit-linear-gradient(84deg, rgba(28, 4, 46, 1) 0%, rgba(35, 15, 8, 1) 100%);
+    // background: linear-gradient(84deg, rgba(28, 4, 46, 1) 0%, rgba(35, 15, 8, 1) 100%);
+    // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1c042e", endColorstr="#230f08", GradientType=1);
 
 
     padding: 2rem $ScreenPadding;
@@ -67,6 +73,8 @@
             }
 
             #search-input {
+
+                background-color: transparent;
                 font-weight: 400;
                 width: 200px;
                 border: none;
@@ -90,6 +98,19 @@
         &::-webkit-scrollbar {
             width: 0px;
             display: none;
+        }
+
+        .no-result {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: $NoResultHeight;
+            // background-color: blue;
+            img {
+                width: $NoResultHeight;
+            }
         }
 
         .profile-card {
@@ -165,5 +186,23 @@
 }
 
 .footer {
-    padding: 0rem $ScreenPadding;
+    // border-top: 1px dashed $FooterColor;
+    padding: 2rem $ScreenPadding;
+
+    .footer-content {
+        color: $FooterColor;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        font-size: 0.9rem;
+
+        a {
+            color: $FooterColor;
+        }
+
+        .grey.heart {
+            color: $FooterColor;
+            font-size: 0.9rem;
+        }
+    }
 }

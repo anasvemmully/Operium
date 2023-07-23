@@ -19,39 +19,6 @@
     <script type="text/javascript" defer>
         (() => {
 
-            const basicScrollTop = function () {
-
-                const btnTop = document.querySelector('#goTop');
-
-                const btnReveal = function () {
-                    if (window.scrollY >= 300) {
-                        btnTop.classList.add('is-visible');
-                    } else {
-                        btnTop.classList.remove('is-visible');
-                    }
-                }
-                
-                const TopscrollTo = function () {
-                    if (window.scrollY != 0) {
-                        setTimeout(function () {
-                            window.scrollTo(0, window.scrollY - 30);
-                            TopscrollTo();
-                        }, 5);
-                    }
-                }
-
-                window.addEventListener('scroll', btnReveal);
-                btnTop.addEventListener('click', TopscrollTo);
-
-            };
-            basicScrollTop();
-
-        })();
-    </script>
-
-    <script type="text/javascript" defer>
-        (() => {
-
             const members = {{ site.data.members | jsonify
         }};
 
@@ -80,17 +47,29 @@
             search(value) {
                 const res = this.users.filter((user) => new RegExp(`^${value}`, 'i').test(user.name));
 
-                res.forEach(((user) => {
-                    this.container.append(user.element);
-                }))
-
-                console.log(res);
+                if (res?.length) {
+                    res.forEach(((user) => {
+                        this.container.append(user.element);
+                    }))
+                } else { 
+                    this.container.append(this.no_result)
+                }
 
                 this.stat.textContent = res?.length;
 
             }
 
             generate(peep) {
+
+                const div = document.createElement("div");
+                div.className = "no-result";
+                const img = document.createElement("img");
+                img.src = "{{ site.baseurl }}/assets/images/404.svg";
+                div.appendChild(img);
+                
+                this.no_result = div;
+                console.log(this.no_result);
+
                 this.users = peep.map(ele => {
 
                     const card = document.querySelector("[user-template]").content.cloneNode(true).children[0];

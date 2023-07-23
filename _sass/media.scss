@@ -50,6 +50,7 @@
 @media (max-width: 900px) {
 
     $ScreenPadding: 2rem;
+    $NoResultHeight: 50vh;
 
     .navigation-container {
         padding: 1.6rem $ScreenPadding;
@@ -70,6 +71,16 @@
 
         .result-container {
             gap: 1rem;
+
+            .no-result {
+
+                height: $NoResultHeight;
+
+                // background-color: blue;
+                img {
+                    width: $NoResultHeight;
+                }
+            }
         }
     }
 }
@@ -131,6 +142,7 @@
 @media (max-width: 655px) {
 
     $ScreenPadding: 2rem;
+    $NoResultHeight: 40vh;
 
     .navigation-container {
         padding: 1.6rem $ScreenPadding;
@@ -159,7 +171,27 @@
 
         .result-container {
             gap: 1rem;
+
+
+            .no-result {
+
+                height: $NoResultHeight;
+
+                // background-color: blue;
+                img {
+                    width: $NoResultHeight;
+                }
+            }
         }
+    }
+}
+
+@media (max-width: 555px) {
+
+    $ScreenPadding: 2rem;
+
+    .footer {
+        padding: 2rem $ScreenPadding;
     }
 }
 
