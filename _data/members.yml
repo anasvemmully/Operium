@@ -1,11 +1,11 @@
-- name: John Doe
-  github: github-john-doe
+- name: Danwand NS
+  github: DanBrown47
   gender: male
   # profile: John Doe.png
-  branch: Data Science
+  branch: Msc Computer Science Artificial Intelligence
   links:
-    # linkedin: https://www.linkedin.com/in/johndoe-536a7b201/
-    github: https://github.com/github-john-doe
-    # website: https://johndoe.github.io
-    # mail: mailto:johndoe@gmail.com
-  description: An adept digital alchemist, conjuring wonders from code with a perfect blend of skill and zeal.
+    linkedin: https://www.linkedin.com/in/danwand
+    github: https://github.com/DanBrown47
+    resume: https://docs.google.com/document/d/1WCCQSA_gaM_eesFJy9PqHRVHr7fN7ouNXLidELWao5Q/edit?usp=sharing
+    mail: mailto:danwand47@gmail.com
+  description: 3 year experienced Software Engineer with experience in Security, DevOps and Machine Learning Application Development An adept digital alchemist, conjuring wonders from code with a perfect blend of skill and zeal.
